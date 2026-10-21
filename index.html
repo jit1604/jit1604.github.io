@@ -1,0 +1,367 @@
+<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"></head><body><title>Abhijit Jayaraman</title>
+<meta name="description" content="Abhijit (Jit) Jayaraman — Computer Science at NUS. I build AI tools that show their sources.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&family=Hanken+Grotesk:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: an annotated brief. A reading column carries the claims; a margin column carries
+   the citations and evidence for each one, the way a cited legal document does. Stacks on phones. */
+:root {
+  --paper: #f5f6f8;
+  --sheet: #ffffff;
+  --ink: #12151d;
+  --muted: #5b6273;
+  --rule: #dde1e8;
+  --link: #2443e0;
+  --mark: #fdeeb0;
+  --display: "Newsreader", "Iowan Old Style", Georgia, serif;
+  --body: "Hanken Grotesk", "Segoe UI", system-ui, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+  --measure: 40rem;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --paper: #0d1016; --sheet: #141821; --ink: #e8ebf1; --muted: #9aa2b3; --rule: #252b37;
+  --link: #8ea4ff; --mark: #3b3418; color-scheme: dark } }
+:root[data-theme="dark"] {
+  --paper: #0d1016; --sheet: #141821; --ink: #e8ebf1; --muted: #9aa2b3; --rule: #252b37;
+  --link: #8ea4ff; --mark: #3b3418; color-scheme: dark }
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body { background: var(--paper); color: var(--ink); font: 400 17px/1.6 var(--body); -webkit-font-smoothing: antialiased; }
+a { color: var(--link); text-decoration-thickness: 1px; text-underline-offset: 3px; }
+a:hover { text-decoration-thickness: 2px; }
+:focus-visible { outline: 2px solid var(--link); outline-offset: 3px; border-radius: 2px; }
+
+.wrap { max-width: 1120px; margin: 0 auto;
+  padding-left: max(20px, env(safe-area-inset-left, 0px)); padding-right: max(20px, env(safe-area-inset-right, 0px)); }
+
+/* Header */
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--paper); }
+header.top { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: color-mix(in srgb, var(--paper) 88%, transparent);
+  backdrop-filter: blur(8px); border-bottom: 1px solid var(--rule); }
+header.top .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 14px; }
+.wordmark { font: 500 1.05rem var(--display); color: var(--ink); text-decoration: none; letter-spacing: 0.01em; }
+nav.sections { display: flex; gap: 20px; flex-wrap: wrap; }
+nav.sections a { font: 500 0.78rem var(--mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); text-decoration: none; }
+nav.sections a:hover { color: var(--ink); }
+
+/* Hero */
+.hero { padding-block: clamp(56px, 10vw, 120px) clamp(40px, 6vw, 72px); }
+.eyebrow { font: 500 0.78rem var(--mono); letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+h1 { font: 400 clamp(2.6rem, 7.2vw, 5.6rem)/1.02 var(--display); letter-spacing: -0.025em; margin: 18px 0 28px; max-width: 15ch; text-wrap: balance; }
+h1 .cite { position: relative; color: var(--ink); text-decoration: none; background-image: linear-gradient(var(--link), var(--link));
+  background-repeat: no-repeat; background-position: 0 92%; background-size: 100% 3px; }
+h1 sup { font: 500 0.22em var(--mono); color: var(--link); vertical-align: super; margin-left: 2px; letter-spacing: 0; }
+@media (prefers-reduced-motion: no-preference) {
+  h1 .cite { animation: link-in 900ms cubic-bezier(.2,.7,.2,1) both; }
+  h1 .cite:nth-of-type(2) { animation-delay: 450ms; }
+  h1 sup { animation: fade-in 400ms ease both; animation-delay: 1100ms; }
+  h1 .cite + sup { animation-delay: 900ms; }
+}
+@keyframes link-in { from { background-size: 0% 3px; } to { background-size: 100% 3px; } }
+@keyframes fade-in { from { opacity: 0.25; } to { opacity: 1; } }
+.lede { font-size: 1.15rem; max-width: var(--measure); color: var(--ink); margin: 0 0 32px; }
+.lede em { font-family: var(--display); font-style: italic; font-size: 1.08em; }
+.hero-row { display: flex; flex-wrap: wrap; gap: 12px 24px; align-items: center; }
+.status { display: inline-flex; align-items: center; gap: 10px; font: 500 0.85rem var(--body); padding: 8px 14px; border: 1px solid var(--rule); border-radius: 999px; background: var(--sheet); }
+.status i { width: 8px; height: 8px; border-radius: 50%; background: var(--link); box-shadow: 0 0 0 4px color-mix(in srgb, var(--link) 18%, transparent); }
+.links { display: flex; flex-wrap: wrap; gap: 8px 20px; font: 500 0.9rem var(--body); }
+
+/* Section scaffolding */
+section.block { padding-block: clamp(48px, 7vw, 88px); border-top: 1px solid var(--rule); }
+.block-head { display: grid; grid-template-columns: 1fr; gap: 6px; margin-bottom: 36px; }
+h2 { font: 400 clamp(1.9rem, 3.6vw, 2.6rem)/1.1 var(--display); letter-spacing: -0.015em; margin: 0; text-wrap: balance; }
+.block-head p { margin: 0; color: var(--muted); max-width: var(--measure); }
+
+/* Annotated entries: claim column + margin column */
+.entry { display: grid; grid-template-columns: minmax(0, 1fr) 280px; gap: 12px 56px; padding-block: 32px; border-top: 1px dashed var(--rule); }
+.entry:first-of-type { border-top: 0; padding-top: 0; }
+.entry .claim { min-width: 0; max-width: var(--measure); }
+.entry h3 { font: 500 1.45rem/1.25 var(--display); margin: 0 0 4px; text-wrap: balance; }
+.entry .where { font: 400 0.82rem var(--mono); color: var(--muted); letter-spacing: 0.02em; margin-bottom: 14px; }
+.entry p { margin: 0 0 12px; }
+.entry ul { margin: 0; padding-left: 1.1em; display: grid; gap: 6px; }
+.entry li::marker { color: var(--muted); }
+mark { background: var(--mark); color: inherit; padding: 0 2px; border-radius: 2px; }
+sup.ref a { font: 500 0.7rem var(--mono); text-decoration: none; padding: 0 1px; }
+.margin { min-width: 0; font-size: 0.88rem; color: var(--muted); border-left: 1px solid var(--rule); padding-left: 18px; display: grid; align-content: start; gap: 14px; }
+.margin .label { font: 500 0.7rem var(--mono); letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+.margin .check { color: var(--ink); }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.tags span { font: 400 0.75rem var(--mono); padding: 3px 8px; border: 1px solid var(--rule); border-radius: 4px; color: var(--ink); background: var(--sheet); }
+
+/* Experience ledger */
+.ledger { display: grid; gap: 0; }
+.job { display: grid; grid-template-columns: 170px minmax(0, 1fr); gap: 8px 40px; padding-block: 22px; border-top: 1px solid var(--rule); }
+.job:first-child { border-top: 0; }
+.job .dates { font: 400 0.82rem var(--mono); color: var(--muted); font-variant-numeric: tabular-nums; padding-top: 4px; }
+.job h3 { font: 500 1.2rem/1.3 var(--display); margin: 0; }
+.job h3 span { font-family: var(--body); font-weight: 400; color: var(--muted); font-size: 0.95rem; }
+.job p { margin: 6px 0 0; max-width: var(--measure); }
+
+/* Skills */
+.skills { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 28px 40px; }
+.skills h3 { font: 500 0.72rem var(--mono); letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin: 0 0 10px; }
+.skills p { margin: 0; }
+
+/* Beyond */
+.beyond { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 24px 40px; }
+.beyond div { border-top: 2px solid var(--ink); padding-top: 14px; }
+.beyond strong { display: block; font: 500 1.1rem var(--display); margin-bottom: 4px; }
+.beyond span { color: var(--muted); font-size: 0.95rem; }
+
+/* Sources */
+ol.sources { margin: 0; padding-left: 0; list-style: none; display: grid; gap: 10px; counter-reset: src; }
+ol.sources li { counter-increment: src; display: grid; grid-template-columns: 2.4rem minmax(0, 1fr); gap: 8px; padding: 10px 12px; border-radius: 6px; transition: background-color .3s; }
+ol.sources li::before { content: "[" counter(src) "]"; font: 500 0.8rem var(--mono); color: var(--link); padding-top: 3px; }
+ol.sources li:target, ol.sources li.lit { background: var(--mark); }
+ol.sources .what { color: var(--muted); font-size: 0.9rem; }
+ol.sources a { word-break: break-word; }
+
+/* Contact */
+.contact { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 32px 56px; align-items: end; }
+.contact h2 { font-size: clamp(2.2rem, 5vw, 3.6rem); }
+.email { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+.email code { font: 500 1rem var(--mono); padding: 10px 14px; background: var(--sheet); border: 1px solid var(--rule); border-radius: 6px; user-select: all; word-break: break-all; }
+.email button { font: 500 0.85rem var(--body); padding: 10px 14px; border-radius: 6px; border: 1px solid var(--ink); background: var(--ink); color: var(--paper); cursor: pointer; }
+.email button:hover { opacity: 0.88; }
+footer { padding-block: 32px 48px; color: var(--muted); font: 400 0.8rem var(--mono); border-top: 1px solid var(--rule); }
+
+@media (max-width: 860px) {
+  .entry { grid-template-columns: minmax(0, 1fr); }
+  .margin { border-left: 0; padding-left: 0; border-top: 1px solid var(--rule); padding-top: 14px; }
+  .job { grid-template-columns: minmax(0, 1fr); gap: 2px; }
+  .contact { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 560px) {
+  nav.sections { gap: 14px; }
+  nav.sections a:nth-child(n+4) { display: none; }
+  body { font-size: 16px; }
+}
+</style>
+
+<header class="top">
+  <div class="wrap">
+    <a class="wordmark" href="#top">Abhijit Jayaraman</a>
+    <nav class="sections" aria-label="Sections">
+      <a href="#work">Work</a>
+      <a href="#experience">Experience</a>
+      <a href="#skills">Skills</a>
+      <a href="#sources">Sources</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <div class="wrap hero">
+    <div class="eyebrow">Computer Science · National University of Singapore</div>
+    <h1>I build <span class="cite">AI tools</span> that <span class="cite">show their sources</span><sup><a href="#sources" style="text-decoration:none">[1–3]</a></sup></h1>
+    <p class="lede">I'm Jit, a second-year CS student. Over the past year I've built LLM pipelines, retrieval features and internal tools for legal teams in Singapore and Kuala Lumpur. Every claim on this page links to its evidence, <em>the same rule I follow when an AI answer has to be trusted.</em></p>
+    <div class="hero-row">
+      <span class="status"><i aria-hidden="true"></i>Open to internships · Jan–Jun 2027 or May–Aug 2027</span>
+      <div class="links">
+        <a href="https://www.linkedin.com/in/abhijit-jayaraman" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://github.com/jit1604" target="_blank" rel="noopener">GitHub</a>
+        <a href="#contact">Email</a>
+      </div>
+    </div>
+  </div>
+
+  <section class="block" id="work" aria-labelledby="work-h">
+    <div class="wrap">
+      <div class="block-head">
+        <div class="eyebrow">Selected work</div>
+        <h2 id="work-h">What I've built, and how it's kept honest</h2>
+        <p>The margin beside each project lists the stack and the check that keeps its output reliable.</p>
+      </div>
+
+      <article class="entry">
+        <div class="claim">
+          <h3>Legal directory submission pipeline</h3>
+          <div class="where">Chambers Lab · Kuala Lumpur · 2026</div>
+          <p>Law firms submit long, structured entries to legal directories every year, and the work was done by hand. I designed and deployed a pipeline that does the first pass.</p>
+          <ul>
+            <li>An LLM extracts each submission's data into a validated Pydantic schema, using the Claude API.</li>
+            <li>Five linked Notion databases hold the work as it moves from intake to draft to review.</li>
+            <li>Event-driven Python workers run each step when someone clicks a Notion button or a record changes.</li>
+          </ul>
+        </div>
+        <aside class="margin" aria-label="Notes">
+          <div><div class="label">The check</div><div class="check"><mark>Staff review every AI draft</mark> before it is used.</div></div>
+          <div><div class="label">Stack</div><div class="tags"><span>Python</span><span>Claude API</span><span>Notion API</span><span>Pydantic</span></div></div>
+        </aside>
+      </article>
+
+      <article class="entry">
+        <div class="claim">
+          <h3>Citation hyperlinking for legal documents</h3>
+          <div class="where">Chambers Lab · 2026</div>
+          <p>Legal documents cite cases and statutes constantly, and linking them by hand is slow. I built a tool that finds the citations and links them in place.</p>
+          <ul>
+            <li>A local LLM (Gemma, served through Ollama) identifies legal citations in the text.</li>
+            <li>The tool edits the document's WordprocessingML (OOXML) directly to insert hyperlinks.</li>
+          </ul>
+        </div>
+        <aside class="margin" aria-label="Notes">
+          <div><div class="label">The check</div><div class="check"><mark>Existing formatting is preserved</mark>, so lawyers get back the document they sent in.</div></div>
+          <div><div class="label">Stack</div><div class="tags"><span>Python</span><span>Ollama</span><span>Gemma</span><span>OOXML</span></div></div>
+        </aside>
+      </article>
+
+      <article class="entry">
+        <div class="claim">
+          <h3>Citation-aware retrieval for Pillar</h3>
+          <div class="where">Jam &amp; Raph · Singapore · 2026</div>
+          <p>Pillar is an AI legal assistant for Singapore law firms. A legal answer is only useful if a lawyer can verify it, so I built the retrieval (RAG) feature that ties each generated answer back to the passages it came from.</p>
+        </div>
+        <aside class="margin" aria-label="Notes">
+          <div><div class="label">The check</div><div class="check"><mark>Every answer points to its source</mark> passage, so it can be audited.</div></div>
+          <div><div class="label">Stack</div><div class="tags"><span>RAG</span><span>Embeddings</span><span>LLMs</span></div></div>
+        </aside>
+      </article>
+
+      <article class="entry">
+        <div class="claim">
+          <h3>FlowPilot<sup class="ref"><a href="#src-3" data-src="src-3">[1]</a></sup></h3>
+          <div class="where">Personal project · 2026</div>
+          <p>A task planner in TypeScript with Next.js, React and Prisma. It supports projects, subtasks and dependencies between tasks.</p>
+          <ul>
+            <li>A rule-based engine turns free-text notes into tasks with due dates and priorities.</li>
+            <li>It ranks what to do next by deadline, priority, how long a task has waited, and whether it suits the time of day.</li>
+          </ul>
+        </div>
+        <aside class="margin" aria-label="Notes">
+          <div><div class="label">Evidence</div><div class="check">Source code, <a href="#src-3" data-src="src-3">[1]</a></div></div>
+          <div><div class="label">Stack</div><div class="tags"><span>TypeScript</span><span>Next.js</span><span>React</span><span>Prisma</span></div></div>
+        </aside>
+      </article>
+
+      <article class="entry">
+        <div class="claim">
+          <h3>NexHack 2026, 3rd place</h3>
+          <div class="where">Agentic AI hackathon · Kuala Lumpur · Jul 2026</div>
+          <p>In a time-boxed hackathon on enterprise and fintech operations, organised by Xenber Sdn Bhd, I designed and built an agentic AI solution for Malaysian compliance officers, then presented and defended it to the judges.</p>
+        </div>
+        <aside class="margin" aria-label="Notes">
+          <div><div class="label">Result</div><div class="check">Placed <mark>3rd</mark> and presented to the judging panel.</div></div>
+          <div><div class="label">Focus</div><div class="tags"><span>Agentic AI</span><span>Compliance</span><span>Fintech</span></div></div>
+        </aside>
+      </article>
+    </div>
+  </section>
+
+  <section class="block" id="experience" aria-labelledby="exp-h">
+    <div class="wrap">
+      <div class="block-head">
+        <div class="eyebrow">Experience</div>
+        <h2 id="exp-h">Where I've worked</h2>
+      </div>
+      <div class="ledger">
+        <div class="job">
+          <div class="dates">May – Jul 2026</div>
+          <div><h3>Product Engineering Intern <span>· Chambers Lab, Kuala Lumpur</span></h3>
+          <p>Built the submission pipeline, citation tool and an intake module that turns SharePoint documents and Fathom meeting transcripts into structured data through the Microsoft Graph API. Worked directly with the founders, presented the system design to leadership, and wrote SOPs so colleagues could run the workflows. Part of the NUS Overseas Colleges programme.</p></div>
+        </div>
+        <div class="job">
+          <div class="dates">Jan – Mar 2026</div>
+          <div><h3>Software Engineer Intern <span>· Jam &amp; Raph, Singapore</span></h3>
+          <p>Built citation-aware retrieval for Pillar and prototyped an Excel automation tool for a client workflow. Joined client discussions and product pitches.</p></div>
+        </div>
+        <div class="job">
+          <div class="dates">May – Aug 2025</div>
+          <div><h3>Software Design Intern <span>· MyCLNQ Health, Singapore</span></h3>
+          <p>Built Python backend services for a healthcare chatbot covering triage, specialist recommendations and consultation booking. Developed REST APIs with FastAPI and MongoDB, and containerised services with Docker across development and production.</p></div>
+        </div>
+        <div class="job">
+          <div class="dates">Jan 2023 – Nov 2024</div>
+          <div><h3>Combat Medic <span>· Singapore Armed Forces, 38th Battalion SCE</span></h3>
+          <p>Received the Battalion Safety Steward Award for the rapid treatment and evacuation of a soldier with heat injury.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="skills" aria-labelledby="skills-h">
+    <div class="wrap">
+      <div class="block-head">
+        <div class="eyebrow">Skills</div>
+        <h2 id="skills-h">What I work with</h2>
+      </div>
+      <div class="skills">
+        <div><h3>Languages</h3><p>Python, TypeScript, JavaScript, Java, SQL, HTML/CSS</p></div>
+        <div><h3>Frameworks</h3><p>FastAPI, Pydantic, React, Next.js, Prisma, REST API design</p></div>
+        <div><h3>AI &amp; LLMs</h3><p>Claude API, OpenAI API, Ollama, RAG, embeddings, prompt engineering, tool calling, structured output, AI agents</p></div>
+        <div><h3>Data &amp; platforms</h3><p>PostgreSQL, Supabase, MongoDB, FAISS, ChromaDB, Git, Docker, Render, Vercel, Microsoft Graph API, Notion API</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" aria-labelledby="beyond-h">
+    <div class="wrap">
+      <div class="block-head">
+        <div class="eyebrow">Beyond code</div>
+        <h2 id="beyond-h">Elsewhere</h2>
+      </div>
+      <div class="beyond">
+        <div><strong>Captain, Tembusu College Football</strong><span>Lead weekly training and prepare the team for inter-college matches.</span></div>
+        <div><strong>Combat medic, SAF</strong><span>Two years of national service, recognised with a battalion safety award.</span></div>
+        <div><strong>IB Diploma, 43/45</strong><span>High distinctions in Mathematics, Economics and Chemistry, St. Joseph's Institution.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="sources" aria-labelledby="sources-h">
+    <div class="wrap">
+      <div class="block-head">
+        <div class="eyebrow">Sources</div>
+        <h2 id="sources-h">Check my work</h2>
+        <p>Public code and links behind the claims above. Client work for Chambers Lab and Jam &amp; Raph is private.</p>
+      </div>
+      <ol class="sources">
+        <li id="src-3"><div><a href="https://github.com/jit1604/flowPilot" target="_blank" rel="noopener">github.com/jit1604/flowPilot</a><div class="what">FlowPilot: TypeScript, Next.js and Prisma</div></div></li>
+        <li id="src-4"><div><a href="https://github.com/jit1604" target="_blank" rel="noopener">github.com/jit1604</a><div class="what">All public repositories</div></div></li>
+        <li id="src-5"><div><a href="https://www.linkedin.com/in/abhijit-jayaraman" target="_blank" rel="noopener">linkedin.com/in/abhijit-jayaraman</a><div class="what">Work history</div></div></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="block" id="contact" aria-labelledby="contact-h">
+    <div class="wrap contact">
+      <div>
+        <div class="eyebrow">Contact</div>
+        <h2 id="contact-h">Hiring for 2027? Let's talk.</h2>
+      </div>
+      <div class="email">
+        <code id="email-addr">abhijayaraman12@gmail.com</code>
+        <button type="button" id="copy-email">Copy email</button>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">Abhijit Jayaraman · Singapore · 2026</div>
+</footer>
+
+<script>
+// Light up the matching source when a citation is hovered or focused.
+document.querySelectorAll('[data-src]').forEach(function (a) {
+  var target = document.getElementById(a.dataset.src);
+  if (!target) return;
+  var on = function () { target.classList.add('lit'); };
+  var off = function () { target.classList.remove('lit'); };
+  a.addEventListener('mouseenter', on); a.addEventListener('mouseleave', off);
+  a.addEventListener('focus', on); a.addEventListener('blur', off);
+});
+// Copy email, falling back to selecting the text.
+document.getElementById('copy-email').addEventListener('click', function () {
+  var btn = this, addr = document.getElementById('email-addr');
+  var done = function () { btn.textContent = 'Copied'; setTimeout(function () { btn.textContent = 'Copy email'; }, 1800); };
+  var select = function () { var r = document.createRange(); r.selectNodeContents(addr); var s = getSelection(); s.removeAllRanges(); s.addRange(r); btn.textContent = 'Selected, press Ctrl/Cmd+C'; };
+  try { navigator.clipboard.writeText(addr.textContent).then(done, select); } catch (e) { select(); }
+});
+</script>
+</body></html>
